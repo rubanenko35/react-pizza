@@ -1,24 +1,43 @@
-import { useState } from 'react'
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import Home from "./ui/Home.jsx";
+import Menu, { loader as menuLoader } from "./features/menu/Menu.jsx";
+import Cart from "./features/cart/Cart.jsx";
+import Order from "./features/order/Order.jsx";
+import CreateOrder from "./features/order/CreateOrder.jsx";
+import AppLayout from "./ui/AppLayout.jsx";
+
+const router = createBrowserRouter([
+  {
+    element: <AppLayout/>,
+    children: [
+      {
+        path: '/',
+        element: <Home/>,
+      },
+      {
+        path: '/menu',
+        element: <Menu/>,
+        loader: menuLoader,
+      },
+      {
+        path: '/cart',
+        element: <Cart/>,
+      },
+      {
+        path: '/order/new',
+        element: <CreateOrder/>,
+      },
+      {
+        path: '/order/:orderId',
+        element: <Order/>,
+      },
+    ]
+  },
+]);
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  return <RouterProvider router={router}/>
 }
 
 export default App
