@@ -1,5 +1,5 @@
 function Username(props) {
-  return <div className="text-sm font-semibold">Oleksandr</div>;
+  return <div className="hidden text-sm font-semibold">Oleksandr</div>;
 }
 
 export default Username;
